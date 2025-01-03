@@ -29,6 +29,13 @@ charger.AdcEnable = true;
 
 Debug.WriteLine($"Minimum System Voltage is config @ {charger.MinimalSystemVoltage.VoltsDc:N3}V");
 
+//Lithium bateries should not be charged below 0 or above 45 C
+//good to set as below if using on lithium batteries
+charger.ChargeVoltageHighTempRange = ChargeVoltage.ChargeSuspend;
+charger.ChargeCurrentHighTempRange = ChargeCurrent.ChargeSuspend;
+charger.ChargeCurrentLowTempRange = ChargeCurrent.ChargeSuspend;
+
+
 while (true)
 {
     Debug.WriteLine($"Vbus status is {charger.VbusStatus}");
@@ -39,7 +46,7 @@ while (true)
     Debug.WriteLine($"Current Vbat: {charger.Vbat.VoltsDc:N3}V");
     Debug.WriteLine($"Current Vsys: {charger.Vsys.VoltsDc:N3}V");
 
-    Debug.WriteLine($"Die Temp: {charger.DieTemperature.DegreesCelsius:N1}°C");
+    Debug.WriteLine($"Die Temp: {charger.DieTemperature.DegreesCelsius:N1}Â°C");
 
     Debug.WriteLine("");
 
